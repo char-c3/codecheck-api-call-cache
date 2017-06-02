@@ -19,7 +19,10 @@ function f($n) {
         $sum = 0;
         foreach ([1,2,3,4] as $i) {
             $m = $n - $i;
-            if ($m >= 0 && !isset($f_memo[$m])) {
+            if ($m < 0) {
+                break;
+            }
+            if (!isset($f_memo[$m])) {
                 $f_memo[$m] = f($m);
             }
             $sum = $f_memo[$m];
