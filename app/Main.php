@@ -30,7 +30,7 @@ function f($n) {
                 if ($m < 0) {
                     break;
                 }
-                $sum = f($m);
+                $sum += f($m);
             }
             $f_memo[$n] = $sum;
         }
