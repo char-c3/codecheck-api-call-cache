@@ -15,19 +15,26 @@ function askServer($n) {
 
 function f($n) {
     global $f_memo, $result_cache;
+    if ($n == 0) {
+        return 1;
+    } 
+    if ($n == 2) {
+        return 2;
+    }
+
     if ($n % 2 === 0) {
-        $sum = 0;
-        foreach ([1,2,3,4] as $i) {
-            $m = $n - $i;
-            if ($m < 0) {
-                break;
+        if (!isset($f_memo[$n])) {
+            $sum = 0;
+            foreach ([1,2,3,4] as $i) {
+                $m = $n - $i;
+                if ($m < 0) {
+                    break;
+                }
+                $sum = $f($m);
             }
-            if (!isset($f_memo[$m])) {
-                $f_memo[$m] = f($m);
-            }
-            $sum = $f_memo[$m];
+            $f_memo[$n] = $sum;
         }
-        return $sum;
+        return $f_memo[$n];
     } else {
         if (!isset($result_cache[$n])) {
             $result_cache[$n] = askServer($n);
@@ -47,7 +54,7 @@ function run ($argc, $argv)
     if ($argc < 2) {
         showUsage();
         echo "too few arguments.\n";
-        exit;
+        exit(1);
     }
 
     $seed = $argv[0];
@@ -56,7 +63,7 @@ function run ($argc, $argv)
     if (!is_numeric($n)) {
         showUsage();
         echo "2nd argument should be integer.\n";
-        exit;
+        exit(1);
     }
     
     echo f(intval($n)), PHP_EOL;
