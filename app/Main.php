@@ -24,7 +24,7 @@ function f($n) {
             }
             $sum = $f_memo[$m];
         }
-        return sum;
+        return $sum;
     } else {
         if (!isset($result_cache[$n])) {
             $result_cache[$n] = askServer($n);
