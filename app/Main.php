@@ -33,11 +33,29 @@ function f($n) {
     }
 }
 
+function showUsage() {
+    echo "Usage: php Main.php seed(string) n(integer)\n";
+}
+
 function run ($argc, $argv)
 {
     global $seed;
+
+    if ($argc < 2) {
+        showUsage();
+        echo "too few arguments.\n";
+        exit;
+    }
+
     $seed = $argv[0];
     $n = $argv[1];
+
+    if (!is_numeric($n)) {
+        showUsage();
+        echo "2nd argument should be integer.\n"
+        exit;
+    }
+    
     echo f(intval($n)), PHP_EOL;
 }
 
