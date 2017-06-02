@@ -52,7 +52,7 @@ function run ($argc, $argv)
 
     if (!is_numeric($n)) {
         showUsage();
-        echo "2nd argument should be integer.\n"
+        echo "2nd argument should be integer.\n";
         exit;
     }
     
